@@ -25,3 +25,9 @@ Properties of a founded item:
 the last 30 days of founded items, which statuses are active shown in the index.html by cards in a table, after click on the view (more) button a modal card opens with the full description of the properties of the selected founded item
 the show of the last 30 days founded item is sorted by backward timeline
 */
+
+import {
+    pocarr
+} from "./db.js";
+
+// console.log(pocarr);
