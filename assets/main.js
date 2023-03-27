@@ -26,7 +26,9 @@ the last 30 days of founded items, which statuses are active shown in the index.
 the show of the last 30 days founded item is sorted by backward timeline
 */
 
-import { pocarr } from "./db.js";
+import {
+  pocarr
+} from "./db.js";
 
 // console.log(pocarr);
 
@@ -39,10 +41,16 @@ let today = new Date();
 let arr30Days = [];
 
 for (let i = 0; i < pocarr.length; i++) {
-  if (
+  /* if (
     new Date(pocarr[i]["found_date&time"]).getFullYear() ===
       today.getFullYear() &&
     new Date(pocarr[i]["found_date&time"]).getMonth() === today.getMonth()
+  ) {
+    arr30Days.push(pocarr[i]);
+  } */
+  if (
+    new Date(pocarr[i]["found_date&time"]) >=
+    new Date(today.getFullYear(), today.getMonth(), today.getDate() - 30)
   ) {
     arr30Days.push(pocarr[i]);
   }
