@@ -38,7 +38,7 @@ import {
 
 let today = new Date();
 
-let arr30Days = [];
+let last60Days = [];
 
 for (let i = 0; i < pocarr.length; i++) {
   /* if (
@@ -50,10 +50,10 @@ for (let i = 0; i < pocarr.length; i++) {
   } */
   if (
     new Date(pocarr[i]["found_date&time"]) >=
-    new Date(today.getFullYear(), today.getMonth(), today.getDate() - 30)
+    new Date(today.getFullYear(), today.getMonth(), today.getDate() - 60)
   ) {
-    arr30Days.push(pocarr[i]);
+    last60Days.push(pocarr[i]);
   }
 }
 
-console.log(arr30Days);
+console.log(last60Days);
