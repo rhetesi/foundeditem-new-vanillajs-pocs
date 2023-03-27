@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /* 
 Properties of a founded item:
@@ -26,8 +26,26 @@ the last 30 days of founded items, which statuses are active shown in the index.
 the show of the last 30 days founded item is sorted by backward timeline
 */
 
-import {
-    pocarr
-} from "./db.js";
+import { pocarr } from "./db.js";
 
 // console.log(pocarr);
+
+// Card of a founded item
+
+// List of last 30 days founded items
+
+let today = new Date();
+
+let arr30Days = [];
+
+for (let i = 0; i < pocarr.length; i++) {
+  if (
+    new Date(pocarr[i]["found_date&time"]).getFullYear() ===
+      today.getFullYear() &&
+    new Date(pocarr[i]["found_date&time"]).getMonth() === today.getMonth()
+  ) {
+    arr30Days.push(pocarr[i]);
+  }
+}
+
+console.log(arr30Days);
