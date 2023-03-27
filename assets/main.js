@@ -35,6 +35,9 @@ import {
 // Card of a founded item
 
 // List of last 30 days founded items
+// Írd át olyan függvénnyé (function), amely bármely 2 dátum közötti időszakra lekérdezi a tárgyak listáját
+// alapértelmezetten a legeső bejegyzéstől a mai napig
+// paraméterként kapja a kezdő és záró dátumot
 
 let today = new Date();
 
