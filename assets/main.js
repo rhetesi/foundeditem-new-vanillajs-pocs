@@ -26,7 +26,9 @@ the last 30 days of founded items, which statuses are active shown in the index.
 the show of the last 30 days founded item is sorted by backward timeline
 */
 
-import { pocarr } from "./db.js";
+import {
+  pocarr
+} from "./db.js";
 
 // console.log(pocarr);
 
@@ -77,10 +79,10 @@ console.log(printArr); */
 
 // let listOfShowingItems = [];
 
-const listDates = {
+/* const listDates = {
   begin: new Date(1900, 0, 1),
   last: new Date(),
-};
+}; */
 
 const anyTwoDateArray = (
   array,
@@ -99,10 +101,10 @@ const anyTwoDateArray = (
   console.log(listOfShowingItems);
 };
 
-anyTwoDateArray(pocarr);
+/* anyTwoDateArray(pocarr);
 anyTwoDateArray(pocarr, new Date(2022, 11, 31));
 anyTwoDateArray(pocarr, new Date(2023, 1, 28), new Date(2022, 5, 30));
-anyTwoDateArray(pocarr, new Date(), new Date(2022, 5, 30));
+anyTwoDateArray(pocarr, new Date(), new Date(2022, 5, 30)); */
 
 // Hogy bármelyik dátumot kezeld, a dátumokat egy object kulcs:érték párjaiban add át!!!
 
@@ -130,3 +132,51 @@ const anyTwoDateArray = (
 };
 
 */
+
+let listDates = {
+  begin: new Date(1900, 0, 1),
+  last: new Date(),
+};
+
+const ld = {
+  begin: new Date(1900, 0, 1),
+  last: new Date(),
+};
+
+// console.log(listDates);
+
+const atda = (
+  array,
+  params
+) => {
+  let listOfShowingItems = [];
+  array.map((item) => {
+    if (
+      new Date(item["found_date&time"]) >= new Date(params.begin) &&
+      new Date(item["found_date&time"]) <= new Date(params.last)
+    ) {
+      listOfShowingItems.push(item);
+    }
+  });
+  console.log(listOfShowingItems);
+};
+
+// 1. változat: kívül módosítom az object kulcsainak értékeit, majd azután hívom a lekérdező függvényt. Ekkor az object lehet CONST -tal definiált
+ld.begin = new Date(2022, 5, 30);
+ld.last = new Date(2023, 1, 28);
+atda(pocarr, ld);
+
+// listDates = {
+//   begin: new Date(2022, 6, 30),
+//   last: new Date(2023, 2, 28)
+// }
+// console.log(listDates);
+
+// 2. válozta: a lekérdező függvény hívásakor módosítom az object kulcsainak értékeit. Ekkor csak LET -tel lehet definiálni az objectet, mert magát az object-et írom felül
+atda(pocarr, listDates = {
+  begin: new Date(2022, 6, 31),
+  last: new Date(2023, 2, 31)
+});
+
+// atda(pocarr, ld);
+// atda(pocarr, ld.begin = new Date(2022, 5, 30), ld.last = new Date(2023, 1, 28));
