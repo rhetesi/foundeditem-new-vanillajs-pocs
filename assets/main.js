@@ -26,9 +26,7 @@ the last 30 days of founded items, which statuses are active shown in the index.
 the show of the last 30 days founded item is sorted by backward timeline
 */
 
-import {
-  pocarr
-} from "./db.js";
+import { pocarr } from "./db.js";
 
 // console.log(pocarr);
 
@@ -59,4 +57,76 @@ for (let i = 0; i < pocarr.length; i++) {
   }
 }
 
-console.log(last60Days);
+// console.log(last60Days);
+
+/* // How to conditional iterating an array w/ .map()
+const printArr = [];
+
+pocarr.map((item) => {
+  if (
+    new Date(item["found_date&time"]) >=
+    new Date(today.getFullYear(), today.getMonth(), today.getDate() - 30)
+  ) {
+    printArr.push(item);
+  }
+});
+
+console.log(printArr); */
+
+// List of founded items between any two (beginning and ending) dates
+
+// let listOfShowingItems = [];
+
+const listDates = {
+  begin: new Date(1900, 0, 1),
+  last: new Date(),
+};
+
+const anyTwoDateArray = (
+  array,
+  last = new Date(),
+  begin = new Date(1900, 0, 1)
+) => {
+  let listOfShowingItems = [];
+  array.map((item) => {
+    if (
+      new Date(item["found_date&time"]) >= new Date(begin) &&
+      new Date(item["found_date&time"]) <= new Date(last)
+    ) {
+      listOfShowingItems.push(item);
+    }
+  });
+  console.log(listOfShowingItems);
+};
+
+anyTwoDateArray(pocarr);
+anyTwoDateArray(pocarr, new Date(2022, 11, 31));
+anyTwoDateArray(pocarr, new Date(2023, 1, 28), new Date(2022, 5, 30));
+anyTwoDateArray(pocarr, new Date(), new Date(2022, 5, 30));
+
+// Hogy bármelyik dátumot kezeld, a dátumokat egy object kulcs:érték párjaiban add át!!!
+
+// console.log(new Date(2023, 10, 23));
+
+/* 
+
+const anyTwoDateArray = (
+  array,
+  begin,
+  last
+) => {
+  let listOfShowingItems = [];
+  !begin ? 
+  !last ? array.map((item) => {
+  if (new Date(item["found_date&time"]) >= new Date(1900, 0, 1) && new Date(item["found_date&time"]) <= new Date()) {
+  listOfShowingItems.push(item);
+  } : if (new Date(item["found_date&time"]) >= new Date(1900, 0, 1) && new Date(item["found_date&time"]) <= new Date(last)) {
+  listOfShowingItems.push(item);
+  } : if (new Date(item["found_date&time"]) >= new Date(begin) && new Date(item["found_date&time"]) <= new Date(last)) {
+  listOfShowingItems.push(item);
+  }
+  });
+  console.log(listOfShowingItems)
+};
+
+*/
