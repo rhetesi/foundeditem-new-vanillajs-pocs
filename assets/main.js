@@ -166,7 +166,7 @@ ld.last = new Date(2023, 1, 28);
 
 // Ezzel a függvénybe ágyazott megoldással nincs felesleges külső objetum, azaz a garbage collector a függvény lefutását követően törli a nem használt memória részleteket. :)
 const atdaFunc = () => {
-  let ls = {
+  const ls = {
     begin: new Date(2000, 0, 1),
     last: new Date()
   }
