@@ -143,28 +143,40 @@ const ld = {
   last: new Date(),
 };
 
+Object.seal(ld);
+
 // console.log(listDates);
 
-const atda = (
-  array,
-  params
-) => {
+function atda(array,
+  params) {
   let listOfShowingItems = [];
   array.map((item) => {
-    if (
-      new Date(item["found_date&time"]) >= new Date(params.begin) &&
-      new Date(item["found_date&time"]) <= new Date(params.last)
-    ) {
+    if (new Date(item["found_date&time"]) >= new Date(params.begin) &&
+      new Date(item["found_date&time"]) <= new Date(params.last)) {
       listOfShowingItems.push(item);
     }
   });
   console.log(listOfShowingItems);
-};
+}
 
 // 1. változat: kívül módosítom az object kulcsainak értékeit, majd azután hívom a lekérdező függvényt. Ekkor az object lehet CONST -tal definiált
 ld.begin = new Date(2022, 5, 30);
 ld.last = new Date(2023, 1, 28);
-atda(pocarr, ld);
+// atda(pocarr, ld);
+
+// Ezzel a függvénybe ágyazott megoldással nincs felesleges külső objetum, azaz a garbage collector a függvény lefutását követően törli a nem használt memória részleteket. :)
+const atdaFunc = () => {
+  let ls = {
+    begin: new Date(2000, 0, 1),
+    last: new Date()
+  }
+  Object.seal(ls);
+  ls.begin = new Date(2022, 5, 30);
+  ls.last = new Date(2022, 11, 15);
+  atda(pocarr, ls);
+}
+
+atdaFunc();
 
 // listDates = {
 //   begin: new Date(2022, 6, 30),
@@ -173,10 +185,10 @@ atda(pocarr, ld);
 // console.log(listDates);
 
 // 2. válozta: a lekérdező függvény hívásakor módosítom az object kulcsainak értékeit. Ekkor csak LET -tel lehet definiálni az objectet, mert magát az object-et írom felül
-atda(pocarr, listDates = {
-  begin: new Date(2022, 6, 31),
-  last: new Date(2023, 2, 31)
-});
+// atda(pocarr, listDates = {
+//   begin: new Date(2022, 6, 31),
+//   last: new Date(2023, 2, 31)
+// });
 
 // atda(pocarr, ld);
 // atda(pocarr, ld.begin = new Date(2022, 5, 30), ld.last = new Date(2023, 1, 28));
