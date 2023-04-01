@@ -26,9 +26,7 @@ the last 30 days of founded items, which statuses are active shown in the index.
 the show of the last 30 days founded item is sorted by backward timeline
 */
 
-import {
-  pocarr
-} from "./db.js";
+import { pocarr } from "./db.js";
 
 // console.log(pocarr);
 
@@ -147,12 +145,13 @@ Object.seal(ld);
 
 // console.log(listDates);
 
-function atda(array,
-  params) {
+function atda(array, params) {
   let listOfShowingItems = [];
   array.map((item) => {
-    if (new Date(item["found_date&time"]) >= new Date(params.begin) &&
-      new Date(item["found_date&time"]) <= new Date(params.last)) {
+    if (
+      new Date(item["found_date&time"]) >= new Date(params.begin) &&
+      new Date(item["found_date&time"]) <= new Date(params.last)
+    ) {
       listOfShowingItems.push(item);
     }
   });
@@ -168,15 +167,15 @@ ld.last = new Date(2023, 1, 28);
 const atdaFunc = () => {
   const ls = {
     begin: new Date(2000, 0, 1),
-    last: new Date()
-  }
+    last: new Date(),
+  };
   Object.seal(ls);
   ls.begin = new Date(2022, 5, 30);
   ls.last = new Date(2022, 11, 15);
   atda(pocarr, ls);
-}
+};
 
-atdaFunc();
+// atdaFunc();
 
 // listDates = {
 //   begin: new Date(2022, 6, 30),
@@ -192,3 +191,63 @@ atdaFunc();
 
 // atda(pocarr, ld);
 // atda(pocarr, ld.begin = new Date(2022, 5, 30), ld.last = new Date(2023, 1, 28));
+
+/* function atda(array,
+  params) {
+  let listOfShowingItems = [];
+  array.map((item) => {
+    if (new Date(item["found_date&time"]) >= new Date(params.begin) &&
+      new Date(item["found_date&time"]) <= new Date(params.last)) {
+      listOfShowingItems.push(item);
+    }
+  });
+  console.log(listOfShowingItems);
+}
+
+const atdaFunc = () => {
+  const ls = {
+    begin: new Date(2000, 0, 1),
+    last: new Date()
+  }
+  Object.seal(ls);
+  ls.begin = new Date(2022, 5, 30);
+  ls.last = new Date(2022, 11, 15);
+  atda(pocarr, ls);
+}
+
+atdaFunc(); */
+// let showDates = document.querySelector(".list");
+
+const anyTwoDatesArray = (array, returnArray, params) => {
+  array.map((item) => {
+    if (
+      new Date(item["found_date&time"]) >= new Date(params.begin) &&
+      new Date(item["found_date&time"]) <= new Date(params.last)
+    ) {
+      returnArray.push(item);
+    }
+  });
+  // console.log(`Eredeti tömb`);
+  // console.log(array);
+  // console.log(`Kimeneti tömb`);
+  // console.log(returnArray);
+  return returnArray;
+};
+
+const anyTwoDatesCall = () => {
+  let list = [];
+  const dates = {
+    begin: new Date(2000, 0, 1),
+    last: new Date(),
+  };
+  Object.seal(dates);
+  dates.begin = new Date(2022, 5, 30);
+  dates.last = new Date(2023, 0, 31);
+  anyTwoDatesArray(pocarr, list, dates);
+  let viewList = document.querySelector(".list");
+  for (let i = 0; i < list.length; i++) {
+    viewList.insertAdjacentText(`beforeend`, list[i][`found_date&time`]);
+  }
+};
+
+anyTwoDatesCall();
