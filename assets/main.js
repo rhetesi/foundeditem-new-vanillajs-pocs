@@ -268,15 +268,19 @@ const anyTwoDatesCall = () => {
   let viewList = document.querySelector(".list");
   for (let i = 0; i < list.length; i++) {
     let tr = createAnyElement("tr");
+    // first cell of table's row
     let td = createAnyElement("td");
     td.insertAdjacentText(`beforeend`, `${i+1}`);
     tr.appendChild(td);
+    // second cell of table's row
     td = createAnyElement("td");
     td.insertAdjacentText(`beforeend`, list[i][`found_date&time`]);
     tr.appendChild(td);
+    // third cell of table's row
     td = createAnyElement("td");
     td.insertAdjacentText(`beforeend`, list[i][`name_of_the_founded_item`]);
     tr.appendChild(td);
+    // fourth cell of table's row
     td = createAnyElement("td", {
       class: "btn-group"
     });
