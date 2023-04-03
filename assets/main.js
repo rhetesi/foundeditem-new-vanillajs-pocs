@@ -1,8 +1,6 @@
 "use strict";
 
-import {
-  createAnyElement
-} from "./html.js";
+import { createAnyElement } from "./html.js";
 /* 
 Properties of a founded item:
 - ID - egyedi azonosító
@@ -29,9 +27,7 @@ the last 30 days of founded items, which statuses are active shown in the index.
 the show of the last 30 days founded item is sorted by backward timeline
 */
 
-import {
-  pocarr
-} from "./db.js";
+import { pocarr } from "./db.js";
 
 // console.log(pocarr);
 
@@ -265,12 +261,13 @@ const anyTwoDatesCall = () => {
   dates.begin = new Date(2022, 5, 30);
   dates.last = new Date(2023, 0, 31);
   anyTwoDatesArray(pocarr, list, dates);
+  console.log(list);
   let viewList = document.querySelector(".list");
   for (let i = 0; i < list.length; i++) {
     let tr = createAnyElement("tr");
     // first cell of table's row
     let td = createAnyElement("td");
-    td.insertAdjacentText(`beforeend`, `${i+1}`);
+    td.insertAdjacentText(`beforeend`, `${i + 1}`);
     tr.appendChild(td);
     // second cell of table's row
     td = createAnyElement("td");
@@ -280,43 +277,54 @@ const anyTwoDatesCall = () => {
     td = createAnyElement("td");
     td.insertAdjacentText(`beforeend`, list[i][`name_of_the_founded_item`]);
     tr.appendChild(td);
-    // fourth cell of table's row
+    // issue's cell of table's row
+    td = createAnyElement("td");
+    td.insertAdjacentText(
+      `beforeend`,
+      list[i][`date_of_issue_of_founded_item`]
+    );
+    tr.appendChild(td);
+    // custody's cell of table's row
+    td = createAnyElement("td");
+    td.insertAdjacentText(`beforeend`, list[i][`start_date_of_current_status`]);
+    tr.appendChild(td);
+    // buttons cell of table's row
     td = createAnyElement("td", {
-      class: "btn-group"
+      class: "btn-group",
     });
     let btn = createAnyElement("button", {
-      class: "btn btn-outline-info"
+      class: "btn btn-outline-info",
     });
     // btn.insertAdjacentText(`beforeend`, `view`);
     let image = createAnyElement(`i`, {
-      class: `bi bi-eye`
+      class: `bi bi-eye`,
     });
     btn.appendChild(image);
     td.appendChild(btn);
     btn = createAnyElement("button", {
-      class: "btn btn-outline-warning"
+      class: "btn btn-outline-warning",
     });
     // btn.insertAdjacentText(`beforeend`, `edit`);
     image = createAnyElement(`i`, {
-      class: `bi bi-pencil`
+      class: `bi bi-pencil`,
     });
     btn.appendChild(image);
     td.appendChild(btn);
     btn = createAnyElement("button", {
-      class: "btn btn-outline-success"
+      class: "btn btn-outline-success",
     });
     // btn.insertAdjacentText(`beforeend`, `transfer`);
     image = createAnyElement(`i`, {
-      class: `bi bi-send`
+      class: `bi bi-send`,
     });
     btn.appendChild(image);
     td.appendChild(btn);
     btn = createAnyElement("button", {
-      class: "btn btn-outline-danger"
+      class: "btn btn-outline-danger",
     });
     // btn.insertAdjacentText(`beforeend`, `delete`);
     image = createAnyElement(`i`, {
-      class: `bi bi-trash`
+      class: `bi bi-trash`,
     });
     btn.appendChild(image);
     td.appendChild(btn);
